@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Master Viewer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="gradient-text">Product Master</h1>
+            <p class="subtitle">Inventory Data Viewer</p>
+        </header>
+
+        <div class="filters-container glass-panel">
+            <div class="filter-group">
+                <label>Dept</label>
+                <select id="filterDept" class="glass-select"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Class</label>
+                <select id="filterClass" class="glass-select"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Subclass</label>
+                <select id="filterSubclass" class="glass-select"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Style</label>
+                <select id="filterItemParent" class="glass-select"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Option</label>
+                <select id="filterParentDiff1" class="glass-select"><option value="">All</option></select>
+            </div>
+            <div class="filter-group filter-actions">
+                <button id="clearFiltersBtn" class="glass-btn" style="margin-top: 1.2rem;">Clear</button>
+            </div>
+        </div>
+
+        <div class="controls-container">
+            <div class="search-wrap">
+                <input type="text" id="searchInput" placeholder="Search products..." class="glass-input">
+            </div>
+            <div class="stats-wrap" style="display: flex; align-items: stretch; gap: 1rem;">
+                <div class="stat-card">
+                    <span class="stat-label">Total Records</span>
+                    <span class="stat-value" id="totalCount">0</span>
+                </div>
+                <button id="viewSizeRangesBtn" class="glass-btn">View Size Ranges</button>
+            </div>
+        </div>
+
+        <div class="table-container glass-panel">
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Size</th>
+                        <th>Size Desc</th>
+                        <th>Style</th>
+                        <th>Subclass</th>
+                        <th>Class</th>
+                        <th>Dept</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data populated via JS -->
+                </tbody>
+            </table>
+            
+            <div id="loading" class="loader-container">
+                <div class="spinner"></div>
+                <p>Loading data...</p>
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <button id="prevBtn" class="glass-btn btn-disabled">Previous</button>
+            <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+            <button id="nextBtn" class="glass-btn">Next</button>
+        </div>
+    </div>
+
+    <!-- Size Ranges Modal -->
+    <div id="sizeRangesModal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <header class="modal-header">
+                <h2 class="gradient-text" style="font-size: 1.8rem; margin-bottom: 0;">Size Ranges</h2>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase;">Range ID</label>
+                        <select id="sizeRangeIdFilter" class="glass-select" style="min-width: 100px; padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <button id="closeModalBtn" class="close-btn">&times;</button>
+                </div>
+            </header>
+            
+            <div class="table-container" style="height: 400px; margin-top: 1rem;">
+                <table id="sizeRangesTable">
+                    <thead>
+                        <tr>
+                            <th>Size Range ID</th>
+                            <th>Size Range</th>
+                            <th>Size Code</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sizeRangesBody">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination" style="margin-top: 1rem;">
+                <button id="modalPrevBtn" class="glass-btn btn-disabled">Previous</button>
+                <span class="page-info">Page <span id="modalCurrentPage">1</span> of <span id="modalTotalPages">1</span></span>
+                <button id="modalNextBtn" class="glass-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
